@@ -45,4 +45,6 @@ group :development do
   gem 'spring'
   # Add bootstrap CSS framework to layouts
   gem 'bootstrap-sass'
+  # flexible authentication solution
+  gem 'devise'
 end

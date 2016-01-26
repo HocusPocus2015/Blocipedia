@@ -1,0 +1,49 @@
+<h1>New Wiki</h1>
+
+ <div class="row">
+   <div class="col-md-4">
+     <p>Guidelines for Wikis</p>
+     <ul>
+       <li>Create an interesting title that GRABS attention.</li>
+       <li>Do not use offensive language.</li>
+       <li>The incessant use of hashtags will get you banned.</li>
+     </ul>
+   </div>
+
+   <div class="col-md-8">
+     <%= form_for @wiki do |f| %>
+       <div class="form-group">
+         <%= f.label :title %>
+         <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
+       </div>
+       <div class="form-group">
+         <%= f.label :body %>
+         <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki content" %>
+       </div>
+       <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdown_topics_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Dropdown
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a href="#">Culture and the arts</a></li>
+        <li><a href="#">Geography and places</a></li>
+        <li><a href="#">Health and fitness</a></li>
+        <li><a href="#">History and events</a></li>
+        <li><a href="#">Mathematics and logic</a></li>
+        <li><a href="#">Natural and physical sciences</a></li>
+        <li><a href="#">People and self</a></li>
+        <li><a href="#">Philosophy and thinking</a></li>
+        <li><a href="#">Religion and belief systems</a></li>
+        <li><a href="#">Society and social sciences</a></li>
+        <li><a href="#">Technology and applied sciences</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="#">Something else</a></li>
+      </ul>
+    </div>
+       <div class="form-group">
+         <%= f.submit "Save", class: 'btn btn-success' %>
+       </div>
+     <% end %>
+   </div>
+ </div>

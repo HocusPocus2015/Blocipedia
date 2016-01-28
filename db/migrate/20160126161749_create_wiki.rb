@@ -3,7 +3,7 @@ class CreateWiki < ActiveRecord::Migration
     create_table :wiki do |t|
       t.string :title
       t.text :body
-      t.dropdown :dropdown_topics_menu
+      # t.select :topic
       t.boolean :private
       t.references :user, index: true, foreign_key: true
 

@@ -47,4 +47,6 @@ group :development do
   gem 'bootstrap-sass'
   # flexible authentication solution
   gem 'devise'
+  # add a scaleable authorization system
+  gem 'pundit'
 end

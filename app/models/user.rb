@@ -3,5 +3,25 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-      
+  has_many :wikis
+
+  def standard?
+    role == 'standard'
+  end
+
+  def admin?
+    role == 'admin'
+  end
+
+  def premium?
+    role == 'premium'
+  end
+
+  def make_wikis_public
+    wikis.each do |wiki|
+      if wiki.public == false
+        wiki.update_attributes(public: true)
+      end
+    end
+  end
 end

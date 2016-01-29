@@ -1,28 +1,24 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Users will be able to sign up for a free account by providing:
+  >a user name
+  >password
+  >email
 
-Things you may want to cover:
+Users can sign in and out of Blocipedia
 
-* Ruby version
+User is automatically given a standard account, able to create, read, update
+and delete public wikis
 
-* System dependencies
+Three user roles exist: admin, standard, or premium
 
-* Configuration
+Development database will be seeded automatically with users and wikis
 
-* Database creation
+Accounts can be upgraded from a free to a paid plan
 
-* Database initialization
+As a premium user, private wikis can be created
 
-* How to run the test suite
+Users will be able to edit wikis using Markdown syntax
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Premium users will be able to add and remove collaborators
+from their private wikis

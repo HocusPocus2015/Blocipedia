@@ -4,6 +4,7 @@ class WikisController < ApplicationController
 
   def new
     @wiki = Wiki.new
+    authorize @wiki
     # @topics = Topic.all
   end
 
@@ -11,6 +12,7 @@ class WikisController < ApplicationController
   def create
     @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user
+    authorize @wiki
       if @wiki.save
         flash[:notice] = "Congrats! Wiki was saved."
         redirect_to @wiki
@@ -32,16 +34,21 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
     # @topics = Topic.find(params[:topic_id])
   end
 
+
   def edit
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
     # @wiki = current_user.wiki.find(params[:id])
   end
 
+
   def update
      @wiki = Wiki.find(params[:id])
+     authorize @wiki
      if @wiki.update_attributes(wiki_params)
        flash[:notice] = "Wiki was updated."
        redirect_to @wiki
@@ -54,6 +61,7 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
     # @topics = Topic.find(params[:id])
       if @wiki.destroy
         flash[:notice] = "Done! Your Wiki has been deleted."
@@ -66,13 +74,15 @@ class WikisController < ApplicationController
 
 
   def index
-    @wiki = Wiki.visible_to(current_user)
+    @wikis = policy_scope(Wiki)
   end
+
 
   private
       def wiki_params
-        params.require(:wiki).permit(:title, :body)
+        params.require(:wiki).permit(:title, :body, :public)
       end
+
 
       def authorize_user
         wiki = Wiki.find(params[:id])

@@ -49,4 +49,7 @@ group :development do
   gem 'devise'
   # add a scaleable authorization system
   gem 'pundit'
+  # add fake data to db
+  gem 'faker'
+
 end

@@ -7,32 +7,32 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'faker'
 # admin for testing
-alice1 = User.new(
-  name: 'Alice Admin',
-  email: 'alicesuckling@live.co.uk',
+example1 = User.new(
+  name: 'Example Admin',
+  email: 'exampleadmin@bloc.co.uk',
   password: 'Test1234',
   role: 'admin'
 )
-alice1.skip_confirmation!
-alice1.save
+
+example1.save
 
 # standard user for testing
-alice2 = User.new(
-  name: 'Alice Standard',
-  email: 'alicesuckling@live.co.uk',
+example2 = User.new(
+  name: 'Example Standard',
+  email: 'examplestandard@bloc.co.uk',
   password: 'Test1234',
 )
-alice2.skip_confirmation!
-alice2.save
+
+example2.save
 
 # another user who will be upgraded and downgraded for testing
-alice3 = USer.new(
-  name: 'Alice Second Standard',
-  email: 'alicesuckling@live.co.uk',
+example3 = User.new(
+  name: 'Example Second Standard',
+  email: 'examplesecondstandard@bloc.co.uk',
   password: 'Test1234'
 )
-alice3.skip_confirmation!
-alice3.save
+
+example3.save
 
 users = User.all
 puts "#{User.count} users created."

@@ -51,5 +51,7 @@ group :development do
   gem 'pundit'
   # add fake data to db
   gem 'faker'
+  # add card payment for upgraded accounts
+  gem 'stripe'
 
 end

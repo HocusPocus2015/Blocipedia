@@ -49,4 +49,9 @@ group :development do
   gem 'devise'
   # add a scaleable authorization system
   gem 'pundit'
+  # add fake data to db
+  gem 'faker'
+  # add card payment for upgraded accounts
+  gem 'stripe'
+
 end

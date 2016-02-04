@@ -19,8 +19,8 @@ class User < ActiveRecord::Base
 
   def make_wikis_public
     wikis.each do |wiki|
-      if wiki.public == false
-        wiki.update_attributes(public: true)
+      if wiki.private == false
+        wiki.update_attributes(private: false)
       end
     end
   end

@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :wikis
 
+  resources :charges, only: [:new, :create]
+  
+
   authenticated :user do
     root to: 'wikis#index', as: :authenticated_root
   end
@@ -12,6 +15,7 @@ Rails.application.routes.draw do
   get 'welcome/about'
 
   root to: 'welcome#index'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

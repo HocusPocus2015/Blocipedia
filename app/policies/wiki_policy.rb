@@ -16,7 +16,7 @@ class WikiPolicy < ApplicationPolicy
       elsif user.present? && user.role == 'premium'
         all_wikis = scope.all
         all_wikis.each do |wiki|
-          if wiki.public? || wiki.user == user || wiki.user.include?(user)
+          if wiki.user == user && wiki != :private#|| wiki.user.include?(user)
             wikis << wiki
           end
         end
@@ -24,7 +24,7 @@ class WikiPolicy < ApplicationPolicy
         all_wikis = scope.all
         wikis = []
         all_wikis.each do |wiki|
-          if wiki.public? || wiki.users.include?(user)
+          if wiki != :private #|| wiki.user.include?(user)
             wikis << wiki
           end
         end
@@ -34,7 +34,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def show?
-    record.public? || user.present?
+    record != :private || user.present?
   end
 
   def make_private?

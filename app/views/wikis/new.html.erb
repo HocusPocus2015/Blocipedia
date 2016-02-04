@@ -22,11 +22,11 @@
       </div>
       <% if policy(@wiki).make_private? %>
       <div class='form-group'>
-        <%= f.label :public, class: 'checkbox' do %>
-          <%= f.check_box :public, {}, false, true %> Keep Wiki Private
+        <%= f.label :private, class: 'checkbox' do %>
+          <%= f.check_box :private, {}, false, true %> Keep Wiki Private
         <% end %>
       </div>
-
+      <% end %>
 
       <div class="form-group">
          <%= f.submit "Save", class: 'btn btn-success' %>

@@ -69,4 +69,6 @@ class ApplicationPolicy
     user_exists? && roles.any? { |role| user.send(:"#{role}?") }
   end
 
+
+
 end

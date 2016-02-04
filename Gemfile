@@ -53,5 +53,7 @@ group :development do
   gem 'faker'
   # add card payment for upgraded accounts
   gem 'stripe'
+  #handle sensitive data
+  gem 'figaro', '1.0'
 
 end

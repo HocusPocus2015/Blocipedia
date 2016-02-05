@@ -1,14 +1,15 @@
-<h1><%= @wiki.title %></h1>
-<%= private %>
-<div class="row">
-  <div class="col-md-8">
-    <p><%= @wiki.body %></p>
-    <!-- <p><%#= @wiki.topic %></p> -->
-  </div>
-  <div class="col-md-4">
-  <% if policy(@wiki).edit? %>
-    <%= link_to "Edit", edit_wiki_path(@wiki.id), class: 'btn btn-success' %>
-    <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you REALLY really sure you want to delete this?' } %>
+<div class='container filler-height'>
+  <div class='inner-wrapper'>
+    <h1><%= @wiki.title %></h1>
+    <%= private %>
+    <p><%= markdown(@wiki.body) %></p>
+    <% if policy(@wiki).edit? %>
+      <%= link_to 'Edit Wiki', edit_wiki_path(@wiki.id), class: 'btn btn-success' %>
+    <% end %>
+    <% if policy(@wiki).destroy? %>
+      <%= link_to "Delete Wiki", @wiki,
+      method: :delete, class: 'btn btn-danger',
+      data: { confirm: 'Are you REALLY really sure you want to delete this?' } %>
     <% end %>
   </div>
 </div>

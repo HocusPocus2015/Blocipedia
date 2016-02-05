@@ -55,5 +55,7 @@ group :development do
   gem 'stripe'
   #handle sensitive data
   gem 'figaro', '1.0'
+  #markdown readymade
+  gem 'redcarpet'
 
 end

@@ -1,35 +1,14 @@
 class WikiPolicy < ApplicationPolicy
 
-
-  class Scope
-    attr_reader :user, :scope
-
-    def initialize(user, scope)
-      @user = user
-      @scope = scope
-    end
-
+  class Scope < Scope
     def resolve
-      wikis = []
-      if user.present? && user.role == 'admin'
-        wikis = scope.all
-      elsif user.present? && user.role == 'premium'
-        all_wikis = scope.all
-        all_wikis.each do |wiki|
-          if wiki.user == user && wiki != :private#|| wiki.user.include?(user)
-            wikis << wiki
-          end
-        end
-      else
-        all_wikis = scope.all
-        wikis = []
-        all_wikis.each do |wiki|
-          if wiki != :private #|| wiki.user.include?(user)
-            wikis << wiki
-          end
-        end
+      if @user.role == 'admin'
+        scope.all 
+      elsif user.role == 'premium'
+        scope.where('private = ? OR user_id = ?', false, user.id)
+      else # this is the lowly standard user and guest
+        scope.where(private: false)
       end
-      wikis
     end
   end
 

@@ -2,8 +2,8 @@ class WikiPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      if @user.role == 'admin'
-        scope.all 
+      if user.role == 'admin'
+        scope.all
       elsif user.role == 'premium'
         scope.where('private = ? OR user_id = ?', false, user.id)
       else # this is the lowly standard user and guest

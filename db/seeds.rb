@@ -91,20 +91,6 @@ private_wikis = Wiki.where(private: true)
   )
 
 end
-# if User.role == 'premium'
-#   3.times do
-#     wiki = Wiki.create!(
-#       user: users.sample,
-#       title: Faker::Lorem.sentence,
-#       # title: "#{_private}" Faker::Lorem.sentence,
-#       body: Faker::Lorem.paragraph,
-#       private: true,
-#       collaborators: users.premium.sample
-#   )
-#   end
-# end
-
-
 
 wikis = Wiki.all
 puts "#{Wiki.count} wikis created."

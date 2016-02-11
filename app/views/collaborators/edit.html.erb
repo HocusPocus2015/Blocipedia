@@ -1,5 +1,3 @@
-
-
 <% if current_user = User.where(role: ["premium", "admin"]) %>
   <%= form_tag collaborators_path, method: :wiki do %>
     <%= text_field_tag :email %>

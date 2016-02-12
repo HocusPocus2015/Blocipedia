@@ -34,7 +34,27 @@ example3 = User.new(
 
 example3.save
 
+# premium to test private wikis and collaborators
+example4 = User.new(
+  name: 'Example Premium',
+  email: 'examplepremium@bloc.co.uk',
+  password: 'Test1234',
+  role: 'premium'
+)
+
+example4.save
+
+example5 = User.new(
+  name: 'Example Second Premium',
+  email: 'examplesecondpremium@bloc.co.uk',
+  password: 'Test1234',
+  role: 'premium'
+)
+
+example5.save
+
 users = User.all
+premium_users = User.where(role: ["premium", "admin"])
 puts "#{User.count} users created."
 
 # Create wikis
@@ -46,5 +66,33 @@ puts "#{User.count} users created."
   )
 end
 
+# create some private and collaborated wikis
+6.times do
+  wiki = Wiki.create!(
+    user: premium_users.sample,
+    title: "Private: #{Faker::Lorem.sentence}",
+    body: Faker::Lorem.paragraph,
+    private: true
+  )
+end
+
 wikis = Wiki.all
-puts "#{wikis.count} wikis created."
+private_wikis = Wiki.where(private: true)
+
+10.times do
+  owner = premium_users.sample
+  wiki = owner.wikis.sample
+  #TODO make sure user is also not a collaborator
+  user = User.where.not(id: owner.id).sample
+
+  collab = Collaborator.create!(
+    user: user,
+    wiki: wiki
+  )
+
+end
+
+wikis = Wiki.all
+puts "#{Wiki.count} wikis created."
+puts "#{User.count} users created."
+puts "#{Collaborator.count} collaborators created."

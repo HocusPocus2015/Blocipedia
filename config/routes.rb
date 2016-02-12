@@ -2,11 +2,13 @@ Rails.application.routes.draw do
   devise_for :users #, controllers: { registrations: "users/registrations" }
 
   resources :users, only: [:show]
-  resources :wikis
+  resources :wikis do
+    get 'collaborators', on: :member
+  end
 
   resources :charges, only: [:new, :create]
 
-  resources :collaborators, only: [:create, :destroy, :edit]
+  resources :collaborators, only: [:create, :destroy]
 
   authenticated :user do
     root to: 'wikis#index', as: :authenticated_root

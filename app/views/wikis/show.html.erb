@@ -13,7 +13,7 @@
     <% end %>
 
     <% if current_user = User.where(role: ["premium", "admin"]) %>
-      <%= link_to "Edit collaborator", edit_collaborator_path(@wiki.id), class: "btn btn-info" %>
+      <%= link_to "Edit collaborators", collaborators_wiki_path(@wiki.id), class: "btn btn-info" %>
     <% end %>
 
   </div>

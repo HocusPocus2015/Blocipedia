@@ -77,6 +77,9 @@ class WikisController < ApplicationController
     @wikis = policy_scope(Wiki)
   end
 
+  def collaborators
+    @wiki = Wiki.find(params[:id])
+  end
 
   private
       def wiki_params

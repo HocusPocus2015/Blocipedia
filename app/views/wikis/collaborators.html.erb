@@ -7,16 +7,17 @@
       <p>
         <%= collaborator.user.email %>
           <%= link_to "Delete", [collaborator], method: :delete, class: 'btn btn-danger' %>
+          <% end %>
       </p>
-    <% end %>
+        <% User.all.each do |user| %>
+        <p>
+          <%= user.email %>
+          <%= link_to "Add", [user], method: :create, class: "btn btn-info" %>
+          <% end %>
+      </p>
+      <p>
+        <%= link_to "Back", :back, class: "btn btn-warning" %>
+      </p>
+
   </div>
 </div>
-
-<% if current_user = User.where(role: ["premium", "admin"]) %>
-  <%= form_tag collaborators_path, method: :wiki do %>
-    <%= text_field_tag :email %>
-    <%= hidden_field_tag :wiki_id, @wiki.id %>
-    <%= submit_tag "Add Collaborator", class: "btn btn-info" %>
-    <%= link_to "Back", :back, class: "btn btn-warning" %>
-  <% end %>
-<% end %>

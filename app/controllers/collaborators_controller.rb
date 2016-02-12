@@ -22,6 +22,7 @@ class CollaboratorsController < ApplicationController
    redirect_to :back
  end
 
+
  def destroy
   wiki = Wiki.find(params[:id])
   collaborator = current_user.collaborators.find(params[:id])

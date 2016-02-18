@@ -8,8 +8,13 @@ class User < ActiveRecord::Base
   has_many :collaborations, through: :collaborators, source: :wiki
   has_many :wikis
 
+  validates :email, presence: true
+  # has_many :wikis, through: :collaborations
   #role = [:admin, :premium, :free]
 
+  def self.search(query)
+    where("email LIKE ?", "%#{query}%")
+  end
 
   def standard?
     role == 'standard'

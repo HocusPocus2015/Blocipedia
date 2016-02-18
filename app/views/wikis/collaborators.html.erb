@@ -1,23 +1,23 @@
-
-
-<div class="container">
-  <div class="row">
-    <h4>Wiki Collaborators</h4>
-    <% @wiki.collaborators.each do |collaborator| %>
-      <p>
-        <%= collaborator.user.email %>
-          <%= link_to "Delete", [collaborator], method: :delete, class: 'btn btn-danger' %>
-          <% end %>
-      </p>
-        <% User.all.each do |user| %>
-        <p>
-          <%= user.email %>
-          <%= link_to "Add", [user], method: :create, class: "btn btn-info" %>
-          <% end %>
-      </p>
-      <p>
-        <%= link_to "Back", :back, class: "btn btn-warning" %>
-      </p>
-
+<%= form_tag collaborators_wiki_path, method: :get do %>
+  <div class='form-group'>
+    <%= label_tag :search %>
+    <%= text_field_tag :search, nil, class: 'form-control', placeholder: 'Enter email of collaborator you wish to add.'%>
+    <%= submit_tag "Search", class: 'form-control', class: 'btn btn-success'%>
   </div>
-</div>
+  <% end %>
+
+<% @results.each do |user| %>
+  <p><%= user.email %>
+  <%= link_to "add", collaborators_path(user_id: user.id, wiki_id: @wiki.id),
+    method: :post, class: "btn btn-warning" %></p>
+<% end %>
+
+<hr>
+<% @collaborators.each do |collaborator| %>
+  <p><%= collaborator.email %>
+  <%= link_to "remove", collaborator, method: :delete, class: "btn btn-primary btn-xs"%></p>
+  <% end %>
+
+<p>
+  <%= link_to "Back", :back, class: "btn btn-info" %>
+</p>

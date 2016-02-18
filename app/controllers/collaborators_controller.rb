@@ -1,36 +1,22 @@
 class CollaboratorsController < ApplicationController
 
-  def edit
-    raise
-    @wiki = nil
-  end
+  def create
+    @collaborator = Collaborator.new({ wiki_id: params[:wiki_id], user_id: params[:user_id]} )
+    if @collaborator.save
+      flash[:error] = "Error adding collaborator "
+    end
+      redirect_to :back
+    end
 
-  def collaborators
-    @wiki = Wiki.find(params[:id])
-  end
-
- def create
-   wiki = Wiki.find(params[:wiki_id])
-   collaborator = current_user.collaborators.build(wiki: wiki)
-
-   if collaborator.save
-     flash[:notice] = "Collaborator added."
-   else
-     flash[:alert] = "Collaborator was not added."
-   end
-
-   redirect_to :back
- end
-
-
+#sort this to work
  def destroy
-  wiki = Wiki.find(params[:id])
-  collaborator = current_user.collaborators.find(params[:id])
-   if collaborator.destroy
-     flash[:notice] = "Collaborator removed."
-   else
-     flash[:alert] = "Collaborator was not removed."
+   @collaborator = Collaborator.find(params[:id])
+   email = @collaborator.email
+   if @collaborator.destroy
+     flash[:error] = "There was an error. Please try again."
    end
-   redirect_to :back
+    redirect_to :back
  end
+ 
+
 end

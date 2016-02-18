@@ -2,12 +2,21 @@ class WikisController < ApplicationController
 #  before_action :require_sign_in, except: :show
 #  before_action :authorize_user, except: [:show, :new, :create]
 
+  def index
+    @wikis = policy_scope(Wiki)
+  end
+
+  def show
+    @wiki = Wiki.find(params[:id])
+    authorize @wiki
+    # @topics = Topic.find(params[:topic_id])
+  end
+
   def new
     @wiki = Wiki.new
     authorize @wiki
     # @topics = Topic.all
   end
-
 
   def create
     @wiki = Wiki.new(wiki_params)
@@ -32,13 +41,6 @@ class WikisController < ApplicationController
     # @wiki = current_user.wikis.create(wiki_params)
     # @topic = Topic.all
 
-  def show
-    @wiki = Wiki.find(params[:id])
-    authorize @wiki
-    # @topics = Topic.find(params[:topic_id])
-  end
-
-
   def edit
     @wiki = Wiki.find(params[:id])
     authorize @wiki
@@ -58,7 +60,6 @@ class WikisController < ApplicationController
      end
    end
 
-
   def destroy
     @wiki = Wiki.find(params[:id])
     authorize @wiki
@@ -72,13 +73,13 @@ class WikisController < ApplicationController
       end
   end
 
-
-  def index
-    @wikis = policy_scope(Wiki)
-  end
-
   def collaborators
+    @results = User.none
+    if params[:search]
+      @results = User.search(params[:search])
+    end
     @wiki = Wiki.find(params[:id])
+    @collaborators = @wiki.collaborators
   end
 
   private

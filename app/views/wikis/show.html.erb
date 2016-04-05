@@ -1,11 +1,13 @@
 <div class='container filler-height'>
   <div class='inner-wrapper'>
     <h1><%= @wiki.title %></h1>
+    
     <%= private %>
     <p><%= markdown(@wiki.body) %></p>
     <% if policy(@wiki).edit? %>
       <%= link_to 'Edit Wiki', edit_wiki_path(@wiki.id), class: 'btn btn-success' %>
     <% end %>
+
     <% if policy(@wiki).destroy? %>
       <%= link_to "Delete Wiki", @wiki,
       method: :delete, class: 'btn btn-danger',
@@ -13,10 +15,7 @@
     <% end %>
 
     <% if current_user = User.where(role: ["premium", "admin"]) %>
-      <!-- <%#= link_to "Edit collaborators", new_collaborator_path(@wiki.id), class: "btn btn-info" %> -->
-      <!-- <%#= link_to "Edit collaborators", wiki_collaborators_path(@wiki.id), class: "btn btn-info" %> -->
       <%= link_to "Edit collaborators", collaborators_wiki_path, class: "btn btn-info" %>
     <% end %>
-
   </div>
 </div>

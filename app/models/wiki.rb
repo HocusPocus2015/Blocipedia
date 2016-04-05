@@ -9,7 +9,4 @@ class Wiki < ActiveRecord::Base
   # validates :topic, presence: true
 
   scope :visible_to, -> (user) { user.role == 'admin' || user.role == 'premium' ? all : where(private: false) }
-
-
-
 end

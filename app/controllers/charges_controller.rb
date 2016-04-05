@@ -1,28 +1,27 @@
 class ChargesController < ApplicationController
 
 def create
-   customer = Stripe::Customer.create(
-     email: current_user.email,
-     card: params[:stripeToken]
-   )
+  customer = Stripe::Customer.create(
+    email: current_user.email,
+    card: params[:stripeToken]
+  )
 
-   charge = Stripe::Charge.create(
-     customer: customer.id,
-     amount: Amount.default,
-     description: "Premium Membership - #{current_user.email}",
-     currency: 'usd'
-   )
+  charge = Stripe::Charge.create(
+    customer: customer.id,
+    amount: Amount.default,
+    description: "Premium Membership - #{current_user.email}",
+    currency: 'usd'
+  )
 
-   flash[:notice] = "Thanks for all the money, #{current_user.email}! Enjoy the service."
-   redirect_to user_path(current_user) # or wherever
+  flash[:notice] = "Thanks for all the money, #{current_user.email}! Enjoy the service."
+  redirect_to user_path(current_user) # or wherever
 
- rescue Stripe::CardError => e
-   flash.now[:alert] = e.message
-   redirect_to new_charge_path
- end
+  rescue Stripe::CardError => e
+    flash.now[:alert] = e.message
+    redirect_to new_charge_path
+  end
 
-
- def new
+  def new
     @amount = 15_00
     @stripe_btn_data = {
       key: "#{ Rails.configuration.stripe[:publishable_key] }",
@@ -30,7 +29,6 @@ def create
       amount: @amount
     }
   end
-
 
   def downgrade
     customer = Stripe::Customer.retrieve(current_user.customer_id)

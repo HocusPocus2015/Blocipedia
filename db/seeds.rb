@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'faker'
 # admin for testing
 example1 = User.new(
@@ -82,14 +75,12 @@ private_wikis = Wiki.where(private: true)
 10.times do
   owner = premium_users.sample
   wiki = owner.wikis.sample
-  #TODO make sure user is also not a collaborator
   user = User.where.not(id: owner.id).sample
 
   collab = Collaborator.create!(
     user: user,
     wiki: wiki
   )
-
 end
 
 wikis = Wiki.all

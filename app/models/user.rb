@@ -9,8 +9,6 @@ class User < ActiveRecord::Base
   has_many :wikis
 
   validates :email, presence: true
-  # has_many :wikis, through: :collaborations
-  #role = [:admin, :premium, :free]
 
   def self.search(query)
     where("email LIKE ?", "%#{query}%")

@@ -14,14 +14,11 @@ include Pundit
   end
 
   protected
-
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :name
   end
 
-
   private
-
   def not_authorized
     if controller_name == "wikis" && action_name == "new"
       flash[:alert] = "You must sign up to create a new wiki."
